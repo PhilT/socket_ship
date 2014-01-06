@@ -35,6 +35,14 @@ module.exports = function(grunt) {
         files: ['lib/**/*.js', 'spec/**/*.js'],
         tasks: ['jshint', 'mochaTest', 'browserify']
       }
+    },
+
+    devUpdate: {
+      main: {
+        options: {
+          updateType: "force"
+        }
+      }
     }
   });
 
@@ -53,10 +61,7 @@ module.exports = function(grunt) {
     grunt.config('mochaTest.test.src', spec_path);
   });
 
-  grunt.loadNpmTasks('grunt-browserify');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-mocha-test');
+  require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
-  grunt.registerTask('default', 'jshint', 'mochaTest');
+  grunt.registerTask('default', ['jshint', 'mochaTest']);
 };
