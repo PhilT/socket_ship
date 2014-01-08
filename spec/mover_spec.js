@@ -14,4 +14,5 @@ describe('mover', function () {
   it('moves', function () {
     expect(subject.direction_x).to.equal(0);
   });
+
 });
